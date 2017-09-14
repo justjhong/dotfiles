@@ -7,7 +7,5 @@
 4. to update the files
     ```
     homeshick cd dotfiles
-    homeshick symlink dotfiles
     homeshick pull
-    homeshick clone jjhong922/dotfiles
     ```

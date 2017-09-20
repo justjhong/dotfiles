@@ -15,6 +15,13 @@
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+# set 256 colors for bash
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+    export TERM='xterm-256color'
+  else
+    export TERM='xterm-color'
+fi
+
 # set all editors to default to vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
@@ -26,7 +33,7 @@ export PATH="/Users/jhong/anaconda3/bin:$PATH"
 # The original version is saved in .bash_profile.pysave
 export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 
-#git-completion setup
+# git-completion setup
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
@@ -35,3 +42,6 @@ export PATH="/usr/local/opt/libiconv/bin:$PATH"
 # Setting PATH for Python 3.6
 # The original version is saved in .bash_profile.pysave
 export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+
+# turn on 256 colors when entering tmux
+alias tmux='tmux -2'

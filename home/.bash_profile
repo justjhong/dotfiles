@@ -45,3 +45,6 @@ export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 
 # turn on 256 colors when entering tmux
 alias tmux='tmux -2'
+
+# set vim to open macvim in window
+alias vim='mvim -v'

@@ -15,6 +15,11 @@
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+# run .bashrc on start
+if [ -s ~/.bashrc ]; then
+    source ~/.bashrc;
+fi
+
 # set 256 colors for bash
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
     export TERM='xterm-256color'
@@ -25,9 +30,6 @@ fi
 # set all editors to default to vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
-
-# added by Anaconda3 4.2.0 installer
-export PATH="/Users/jhong/anaconda3/bin:$PATH"
 
 # Setting PATH for Python 2.7
 # The original version is saved in .bash_profile.pysave

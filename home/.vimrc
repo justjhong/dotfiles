@@ -31,7 +31,7 @@ set colorcolumn=90
 " shortcut to paste from clipboard without indentation
 set pastetoggle=<F10>
 
-"Solarized colorscheme setup
+" Solarized colorscheme setup
 syntax enable
 set background=dark
 set t_Co=256
@@ -39,12 +39,12 @@ let g:solarized_termtrans=1
 let g:solarized_termcolors=16
 colorscheme solarized
 
-"footer config
+" footer config
 let g:airline_theme="simple"
 let g:tmuxline_theme = 'airline_insert'
 let g:airline#extensions#tabline#enabled = 1
 
-"Disable arrow keys in normal and insert mode
+" Disable arrow keys in normal and insert mode
 nnoremap <Left> <Nop>
 nnoremap <Right> <Nop>
 nnoremap <Down> <Nop>
@@ -77,20 +77,20 @@ nnoremap <C-l> <C-w>l
 " ctrl p setup - ignores same as .gitignore files
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
-" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " see https://gist.github.com/bsag/39eb930087c46521b763
 " The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
+" if executable('ag')
+"   " Use ag over grep
+"   set grepprg=ag\ --nogroup\ --nocolor
+"
+"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"
+"   " ag is fast enough that CtrlP doesn't need to cache
+"   let g:ctrlp_use_caching = 0
+" endif
 
 " find and remove trailing spaces using \rtw
 match ErrorMsg '\s\+$'
@@ -99,3 +99,6 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 " syntastic setup
 let g:syntastic_javascript_checkers=['eslint']
 let g:syntastic_ruby_checkers=['rubocop']
+
+" copy to clipboard
+set clipboard=unnamed

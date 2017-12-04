@@ -50,3 +50,12 @@ alias tmux='tmux -2'
 
 # set vim to open macvim in window
 alias vim='mvim -v'
+
+# show git branch on prompt line
+function parse_git_branch {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "("${ref#refs/heads/}")"
+}
+
+PS1="\w \$(parse_git_branch)\$ "
+

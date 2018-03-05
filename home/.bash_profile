@@ -31,9 +31,8 @@ fi
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# Setting PATH for Python 2.7
-# The original version is saved in .bash_profile.pysave
-export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+# vim command opens nvim
+alias vim="nvim"
 
 # git-completion setup
 if [ -f ~/.git-completion.bash ]; then
@@ -41,15 +40,16 @@ if [ -f ~/.git-completion.bash ]; then
 fi
 export PATH="/usr/local/opt/libiconv/bin:$PATH"
 
+# Setting PATH for Python 2.7
+# The original version is saved in .bash_profile.pysave
+export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+
 # Setting PATH for Python 3.6
 # The original version is saved in .bash_profile.pysave
 export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 
 # turn on 256 colors when entering tmux
 alias tmux='tmux -2'
-
-# set vim to open macvim in window
-alias vim='mvim -v'
 
 # show git branch on prompt line
 function parse_git_branch {

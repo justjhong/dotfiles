@@ -1,7 +1,7 @@
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+" - Avoid using standard Vim directory names like 'plugin' ex. .vim/plugged
+call plug#begin('~/.local/share/nvim/plugged')
 
 " Make sure you use single quotes
 
@@ -14,6 +14,19 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'rking/ag.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'lervag/vimtex'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'ervandew/supertab'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 " Initialize plugin system
 call plug#end()
@@ -74,23 +87,34 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" move around lines
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+
+inoremap ∆ <Esc>:m .-2<CR>==gi
+inoremap ˚ <Esc>:m .+1<CR>==gi
+
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
+
 " ctrl p setup - ignores same as .gitignore files
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " see https://gist.github.com/bsag/39eb930087c46521b763
-" The Silver Searcher
-" if executable('ag')
-"   " Use ag over grep
-"   set grepprg=ag\ --nogroup\ --nocolor
-"
-"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-"
-"   " ag is fast enough that CtrlP doesn't need to cache
-"   let g:ctrlp_use_caching = 0
-" endif
+if executable('ag')
+  " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast, respects .gitignore
+  " and .agignore. Ignores hidden files by default.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -f -g ""'
+else
+  "ctrl+p ignore files in .gitignore
+  let g:ctrlp_user_command = [
+      \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
+      \ 'find %s -type f'
+      \ ]
+endif
 
 " find and remove trailing spaces using \rtw
 match ErrorMsg '\s\+$'
@@ -102,3 +126,58 @@ let g:syntastic_ruby_checkers=['rubocop']
 
 " copy to clipboard
 set clipboard=unnamed
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" UltiSnips jumping
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
+let g:UltiSnipsJumpBackwardTrigger="<C-c>"
+
+
+" Don't map any tabs, I'll do it later
+let g:UltiSnipsExpandTrigger = '<NOP>'
+let g:SuperTabMappingForward = '<NOP>'
+let g:SuperTabMappingBackward = '<NOP>'
+" Don't unmap my mappings
+let g:UltiSnipsMappingsToIgnore = [ "SmartTab", "SmartShiftTab" ]
+
+" Make <CR> smart
+let g:ulti_expand_res = 0
+function! Ulti_ExpandOrEnter()
+  " First try to expand a snippet
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res
+    " if successful, just return
+    return ''
+  elseif pumvisible()
+    " if in completion menu - just close it and leave the cursor at the
+    " end of the completion
+    return deoplete#mappings#close_popup()
+  else
+    " otherwise, just do an "enter"
+    return "\<return>"
+  endif
+endfunction
+inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
+
+" enable deoplete
+let g:deoplete#enable_at_startup = 1
+" Use smartcase.
+let g:deoplete#enable_smart_case = 1
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
+inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
+" deoplete gets ultisnips
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+
+
+" vimtex
+let g:vimtex_view_method='skim'
+let g:vimtex_view_general_options='-r @line @pdf @tex'
+
+let g:vimtex_fold_enabled=0
+autocmd FileType tex :nmap <Leader>lm \lm
+
+let g:tex_flavor = 'latex'
+au BufReadPost *.tex set syntax=tex

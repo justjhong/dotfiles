@@ -1,9 +1,5 @@
-" install vimplug if not present
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+" call prior: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" :call plug#begin('~/.config/nvim') if :PlugInstall not recognized
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -11,13 +7,13 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Make sure you use single quotes
-
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'flazz/vim-colorschemes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'rking/ag.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -61,13 +57,12 @@ set pastetoggle=<F10>
 " Solarized colorscheme setup
 syntax enable
 set background=dark
-set t_Co=256
-let g:solarized_termtrans=1
-let g:solarized_termcolors=16
-colorscheme solarized
+colorscheme gruvbox
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
 
 " footer config
-let g:airline_theme="simple"
+let g:airline_theme="badwolf"
 let g:tmuxline_theme = 'airline_insert'
 let g:airline#extensions#tabline#enabled = 1
 
@@ -151,7 +146,6 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
 let g:UltiSnipsJumpBackwardTrigger="<C-c>"
 
-
 " Don't map any tabs, I'll do it later
 let g:UltiSnipsExpandTrigger = '<NOP>'
 let g:SuperTabMappingForward = '<NOP>'
@@ -179,6 +173,7 @@ endfunction
 inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 
 " enable deoplete
+set runtimepath+=~/.local/share/nvim/plugged/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
 " Use smartcase.
 let g:deoplete#enable_smart_case = 1
@@ -186,8 +181,7 @@ let g:deoplete#enable_smart_case = 1
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 " deoplete gets ultisnips
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-
+" call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 " vimtex
 let g:vimtex_view_method='skim'

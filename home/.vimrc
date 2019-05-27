@@ -1,3 +1,10 @@
+" install vimplug if not present
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin' ex. .vim/plugged
@@ -20,6 +27,10 @@ Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'leafgarland/typescript-vim'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -37,6 +48,9 @@ set cursorline
 set relativenumber
 set ignorecase
 set smartcase
+
+" lazy redraw to speed up when syntax highlighting is heavy
+set lazyredraw
 
 " max len line
 set colorcolumn=90
@@ -69,6 +83,9 @@ inoremap <Up> <Nop>
 
 " maps jk to escape
 inoremap jk <Esc>
+
+" search highlighting with <Ctrl-i>
+nnoremap <silent> <C-i> :nohl<CR><C-l>
 
 " auto indentation
 set autoindent
@@ -181,3 +198,7 @@ autocmd FileType tex :nmap <Leader>lm \lm
 
 let g:tex_flavor = 'latex'
 au BufReadPost *.tex set syntax=tex
+
+" prettier
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync

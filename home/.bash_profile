@@ -59,3 +59,16 @@ function parse_git_branch {
 
 PS1="\w \$(parse_git_branch)\$ "
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Applications/google-cloud-sdk/path.bash.inc' ]; then . '/Applications/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Applications/google-cloud-sdk/completion.bash.inc' ]; then . '/Applications/google-cloud-sdk/completion.bash.inc'; fi
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export CLIENT_ID="676423596371-vtuqpn935s03i16u2uv72p4csqfrv384.apps.googleusercontent.com"
+export CLIENT_SECRET="qwiqBPyYurKHpq5YLWZ_9KHq"
+alias kfctl="~/Documents/Berkeley/BLISS_research/distributed-cpu-learning/kfctl"
+export ZONE="us-west1-b"
+export PROJECT="deep-learning-233006"
+export KFAPP="dl-kf-app"

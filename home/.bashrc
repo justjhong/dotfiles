@@ -1,7 +1,6 @@
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 source "/usr/local/opt/homeshick/homeshick.sh"
-
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER (from https://gist.github.com/stephenll/8762279)
 #   -----------------------------
@@ -16,6 +15,7 @@ alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
 alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
 alias ..='cd ../'                           # Go back 1 directory level
 alias ...='cd ../../'                       # Go back 2 directory levels
+alias .2='cd ../../'                        # Go back 2 directory levels
 alias .3='cd ../../../'                     # Go back 3 directory levels
 alias .4='cd ../../../../'                  # Go back 4 directory levels
 alias .5='cd ../../../../../'               # Go back 5 directory levels
@@ -33,6 +33,12 @@ mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and ju
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
 ql () { qlmanage -p "$*" >& /dev/null; }    # ql:           Opens any file in MacOS Quicklook Preview
 alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
+alias jnb='jupyter notebook'
+alias gs='git status'
+alias gco='git checkout'
+alias ga='git add'
+alias gp='git push'
+alias gc='git commit'
 
 #   lr:  Full Recursive Directory Listing
 #   ------------------------------------------

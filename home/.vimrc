@@ -34,6 +34,7 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
+Plug 'zchee/deoplete-clang'
 
 " Initialize plugin system
 call plug#end()
@@ -98,6 +99,9 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" remove command line command
+nnoremap q: <Nop>
 
 " move around lines
 nnoremap ∆ :m .+1<CR>==

@@ -47,8 +47,12 @@ function parse_git_branch {
 
 PS1="\w \$(parse_git_branch)\$ "
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Applications/google-cloud-sdk/path.bash.inc' ]; then . '/Applications/google-cloud-sdk/path.bash.inc'; fi
+# ruby in path and set up rbenv automatically
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+eval "$(rbenv init -)"
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Applications/google-cloud-sdk/completion.bash.inc' ]; then . '/Applications/google-cloud-sdk/completion.bash.inc'; fi
+# relax multithreading fork safety from High Sierra
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# python3 cli in path
+export PATH="/Users/jjhong/Library/Python/3.7/bin:$PATH"

@@ -177,8 +177,8 @@ endfunction
 inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 
 " enable deoplete
-set runtimepath+=~/.local/share/nvim/plugged/deoplete.nvim/
-let g:deoplete#enable_at_startup = 1
+" set runtimepath+=~/.local/share/nvim/plugged/deoplete.nvim/
+" let g:deoplete#enable_at_startup = 1
 " Use smartcase.
 let g:deoplete#enable_smart_case = 1
 " deoplete tab-complete

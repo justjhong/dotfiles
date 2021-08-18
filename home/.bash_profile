@@ -17,7 +17,8 @@ export EDITOR="$VISUAL"
 # vim command opens nvim
 alias vim="nvim"
 
-# use vimrc for nvim
+# r command opens radian
+alias r="radian"
 
 # git-completion setup
 if [ -f ~/.git-completion.bash ]; then
@@ -56,3 +57,30 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # python3 cli in path
 export PATH="/Users/jjhong/Library/Python/3.7/bin:$PATH"
+
+# pyenv-virtualenv automatic activation
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+
+export PATH="$HOME/.poetry/bin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/jjhong/opt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/jjhong/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/jjhong/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/jjhong/opt/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

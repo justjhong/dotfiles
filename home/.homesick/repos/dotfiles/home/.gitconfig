@@ -1,0 +1,15 @@
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[user]
+	name = Justin Hong
+	email = jjhong922@berkeley.edu
+[push]
+	default = simple
+[core]
+	autocrlf = input
+[credential]
+	helper = osxkeychain
+[alias]
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

@@ -1,9 +1,3 @@
-
-#### FIG ENV VARIABLES ####
-# Please make sure this block is at the start of this file.
-[ -s ~/.fig/shell/pre.sh ] && source ~/.fig/shell/pre.sh
-#### END FIG ENV VARIABLES ####
-
 #   -----------------------------
 #   1. Old bash profile
 #   -----------------------------
@@ -13,8 +7,8 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 [ -z "$ZSH_NAME" ] && [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-export HOMESHICK_DIR=/usr/local/opt/homeshick
-source "/usr/local/opt/homeshick/homeshick.sh"
+export HOMESHICK_DIR=/opt/homebrew/opt/homeshick
+source "/opt/homebrew/opt/homeshick/homeshick.sh"
 
 # set 256 colors for bash
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
@@ -39,25 +33,11 @@ if [ -f ~/.git-completion.zsh ]; then
 fi
 export PATH="/usr/local/opt/libiconv/bin:$PATH"
 
-# Setting PATH for Python 2.7
-# The original version is saved in .bash_profile.pysave
-export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
-
-# Setting PATH for Python 3.6
-# The original version is saved in .bash_profile.pysave
-export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
-
-# Add TeXbin to PATH
-export PATH="/Library/TeX/texbin:${PATH}"
-
 # turn on 256 colors when entering tmux
 alias tmux="tmux -2"
 
 # relax multithreading fork safety from High Sierra
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-
-# python3 cli in path
-export PATH="/Users/jjhong/Library/Python/3.7/bin:$PATH"
 
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER (from https://gist.github.com/stephenll/8762279)
@@ -98,7 +78,6 @@ alias ga='git add'
 alias gp='git push'
 alias gc='git commit'
 alias gd='git diff'
-alias sshy='ssh jjhong922@login.eecs.berkeley.edu'
 
 # Conda aliases
 alias condde='conda deactivate'
@@ -120,8 +99,3 @@ alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\
 #   ------------------------------------------------------------
     showa () { /usr/bin/grep --color=always -i -a1 $@ ~/Library/init/bash/aliases.bash | grep -v '^\s*$' | less -FSRXc ; }
 
-
-#### FIG ENV VARIABLES ####
-# Please make sure this block is at the end of this file.
-[ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
-#### END FIG ENV VARIABLES ####
